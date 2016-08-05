@@ -12,14 +12,20 @@ let homeModule = angular.module('home', [
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('home', {
-      url: '/',
-      component: 'home'
-    });
+  .state('home', {
+    url: '/',
+    component: 'home',
+    onEnter: function ($window) {
+      $window.document.title = "Home Page";
+    },
+    simpleObj:  function(){
+      return {value: 'simple!'};
+    }
+  });
 })
 
 .component('home', homeComponent)
-  
+
 .name;
 
 export default homeModule;
