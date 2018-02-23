@@ -28,6 +28,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-template": "^3.0.0",
     "gulp-util": "^3.0.7",
+    "gulp-zip": "^4.1.0",
     "html-webpack-plugin": "^1.7.0",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",

@@ -1,6 +1,7 @@
 'use strict';
 
 import gulp     from 'gulp';
+import zip      from 'gulp-zip';
 import webpack  from 'webpack';
 import path     from 'path';
 import sync     from 'run-sequence';
@@ -42,7 +43,8 @@ let paths = {
   ],
   output: root,
   blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
-  dest: path.join(__dirname, 'dist')
+  dest: path.join(__dirname, 'dist'),
+  liv: path.join(__dirname, 'livrable')
 };
 
 // use webpack.config.js to build modules
@@ -117,10 +119,19 @@ gulp.task('component', () => {
 });
 
 gulp.task('clean', (cb) => {
-  del([paths.dest]).then(function (paths) {
+  del([paths.dest, paths.liv]).then(function (paths) {
     gutil.log("[clean]", paths);
     cb();
   })
 });
+
+gulp.task('zip', () =>
+  gulp.src('dist/*')
+    .pipe(zip('livrable.zip'))
+    .pipe(gulp.dest('livrable'))
+);
+
+// FIXME zip after webpack
+//gulp.task('build', ['webpack', 'zip']);
 
 gulp.task('default', ['watch']);
